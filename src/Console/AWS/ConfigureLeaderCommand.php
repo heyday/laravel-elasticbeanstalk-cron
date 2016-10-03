@@ -91,6 +91,7 @@ class ConfigureLeaderCommand extends Command
                 });
 
                 $leader = false;
+                $this->info('$candidatesInstances:'.print_r($candidatesInstances));
 
                 if (!empty($candidateInstances)) { //there are instances running
                     if (count($candidateInstances) > 1) {

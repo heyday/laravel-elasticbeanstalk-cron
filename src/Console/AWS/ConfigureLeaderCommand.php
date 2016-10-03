@@ -100,14 +100,16 @@ class ConfigureLeaderCommand extends Command
                         $oldestInstance = F\sort($candidateInstances, function ($left, $right) {
                             return $left['LaunchTime'] > $right['LaunchTime'];
                         })[0];
+
+                        if ($oldestInstance['InstanceId'] == $result) {
+                            // if this instance is the oldest instance it's the leader
+                            $leader = true;
+                        }
                     } else {
                         $this->info('Only one instance running...');
-                        $oldestInstance = $candidateInstances[1];
-                    }
-                    if ($oldestInstance['InstanceId'] == $result) {
-                        // if this instance is the oldest instance it's the leader
                         $leader = true;
                     }
+
                 } else {
                     $this->info('No candidate instances found. \'O Brave New World!');
                     $leader = true;
